@@ -1,0 +1,44 @@
+.container {
+    width: 100vw;
+    padding: 2rem;
+    margin-top: 4rem;
+    background-color: #f5f9ff;  
+}
+
+.home-container {
+    display: flex;
+    padding: 2rem;
+}
+
+.home-container>div:first-child {
+    width: 40%;
+    padding: 0 3rem;
+}
+
+.home-container>div:first-child h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.home-container>div:first-child p {
+    line-height: 1.5;
+    margin-bottom: 2rem;
+}
+
+.home-container>div:first-child a {
+    height: 2rem;
+    width: 5rem;
+    background-color: rgba(21, 58, 245, 0.925);
+    border-radius: 0.25rem;
+    padding: 0.75rem;
+    color: #fff;
+    text-decoration: none;
+}
+
+.home-container>div:last-child {
+    flex: 1;
+}
+
+.home-container>div:last-child img {
+    width: 100%;
+}

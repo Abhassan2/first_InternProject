@@ -1,0 +1,57 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  font-size: 20px;
+  z-index: 1000;
+  background-color: #fff;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+  font-weight: 600;
+}
+
+.navbar-logo>div:first-child {
+  color: blue;
+}
+
+
+.navbar-links>ul {
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+}
+
+.navbar-links>ul li {
+  font-weight: 500;
+  margin: 0 2rem;
+}
+
+.navbar-links>ul>li>a {
+  text-decoration: none;
+  color: black;
+}
+
+.navbar-links > ul > li > a.active {
+  position: relative;
+}
+
+.navbar-links > ul > li > a.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;          
+  width: 100%; 
+  height: 2px;  
+  background: blue; 
+}
