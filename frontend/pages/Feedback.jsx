@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "../src/css/Feedback.css";
 import axios from "axios";
 import { toast } from "react-toastify";
+import RatingCard from "../src/components/RatingCard";
 
 export default function Feedback({ apiBaseUrl }) {
   const [name, setName] = useState("");
@@ -10,25 +11,10 @@ export default function Feedback({ apiBaseUrl }) {
   const [event, setEvent] = useState("");
   const [comment, setComment] = useState("");
   const [error, setError] = useState("");
-
-  const handleRating = (e) => {
-    setError();
-    const selected = Number(e.target.id);
-    setRating(selected);
-
-    let lists = e.target.parentElement.childNodes;
-    for (let i = 0; i < lists.length; i++) {
-      lists[i].classList.remove("ratingColor");
-    }
-
-    for (let i = 0; i < selected; i++) {
-      lists[i].classList.add("ratingColor");
-    }
-  };
-
+  const ratingCards = useRef();
+  
   const handleForm = async (e) => {
     e.preventDefault();
-
     if (!rating) {
       return setError("Enter rating");
     }
@@ -49,12 +35,20 @@ export default function Feedback({ apiBaseUrl }) {
         setComment("");
         setRating();
         setEvent("");
+
+        ratingCards.current.childNodes.forEach((child) => {
+          child.classList.remove("rating-cardColor");
+        });
       } else {
         toast.error(response.data.message);
       }
     } catch (error) {
       console.log(error.message);
     }
+  };
+
+  const extractingRating = (value) => {
+    setRating(value);
   };
 
   return (
@@ -72,7 +66,11 @@ export default function Feedback({ apiBaseUrl }) {
             <div className="form-grouped">
               <div className="form-items">
                 <label>Event</label>
-                <select value={event} onChange={(e) => setEvent(e.target.value)} required>
+                <select
+                  value={event}
+                  onChange={(e) => setEvent(e.target.value)}
+                  required
+                >
                   <option value="">Select an event</option>
                   <option required value="Tech Conference">
                     Tech Conference
@@ -101,7 +99,7 @@ export default function Feedback({ apiBaseUrl }) {
                 <label htmlFor="email">Email</label>
                 <input
                   onChange={(e) => setEmail(e.target.value)}
-                  type="text"
+                  type="email"
                   name="email"
                   value={email}
                   id="email"
@@ -113,33 +111,7 @@ export default function Feedback({ apiBaseUrl }) {
             <div className="form-items">
               <label htmlFor="">Rating</label>
               {error && <p>{error}</p>}
-              <div className="rating-form">
-                <div
-                  className="rating"
-                  id="1"
-                  onClick={(e) => handleRating(e)}
-                ></div>
-                <div
-                  className="rating"
-                  id="2"
-                  onClick={(e) => handleRating(e)}
-                ></div>
-                <div
-                  className="rating"
-                  id="3"
-                  onClick={(e) => handleRating(e)}
-                ></div>
-                <div
-                  className="rating"
-                  id="4"
-                  onClick={(e) => handleRating(e)}
-                ></div>
-                <div
-                  className="rating"
-                  id="5"
-                  onClick={(e) => handleRating(e)}
-                ></div>
-              </div>
+              <RatingCard extractingRating={extractingRating} useRef={ratingCards} />
             </div>
             <div className="form-items">
               <label htmlFor="comment">Comment</label>
