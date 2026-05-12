@@ -54,3 +54,13 @@
 .card>div:last-child button:hover {
     color: black;
 }
+
+@media only screen and (max-width: 600px) {
+    .event-container {
+        padding: 1rem 0;
+    }
+
+    .card {
+        width: 100%;
+    }    
+}

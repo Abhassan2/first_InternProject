@@ -43,7 +43,6 @@
     border-radius: 0.25rem;
     border: 2px solid rgba(0, 0, 0, 0.2);
     cursor: pointer;
-    outline: none;
 }
 
 .form-items textarea {
@@ -59,4 +58,37 @@
     border-radius: 0.25rem;
     margin: 1rem 2rem 0 0;
     cursor: pointer;
+}
+
+.form-btn button:focus {
+    color: black;
+    background-color: #fff;
+}
+
+@media only screen and (max-width: 600px) {
+    .feedback-container {
+        padding: 0;
+        margin-top: 1rem;
+    }
+
+    .feedback-container .header {
+        margin-bottom: 1rem;
+    }
+
+    .form-container form .form-grouped {
+        flex-direction: column;
+    }
+
+    .form-items {
+        margin: 0.25rem 0;
+    }
+
+    .form-items input, select, textarea {
+        width: 100%;
+    }
+
+    .form-items {
+        font-size: 1rem;
+        font-weight: 600;
+    }
 }

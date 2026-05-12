@@ -1,0 +1,48 @@
+.feedback-card {
+    display: flex;
+    width: 100%;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    margin: 0.5rem 0;
+}
+
+.feedback-card>div {
+    margin: 0 0.5rem;
+}
+
+.feedback-card>div:first-child {
+    width: 23px;
+    height: 23px;
+    font-size: 16px;
+    text-align: center;
+    margin: 0.25rem;
+    border-radius: 5px;
+    background-color: rgba(210, 215, 217, 0.701);
+}
+
+.feedback-card>div:last-child {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+}
+
+.feedback-card>div:last-child div {
+    width: calc(100% / 2);
+    padding-left: 1rem;
+    border-left: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.feedback-card>div:last-child>div:nth-last-child(1) {
+    width: 100%;
+}
+
+.feedback-card>div:last-child>div:nth-last-child(2),
+.feedback-card>div:last-child>div:nth-last-child(3) {
+    width: 20%;
+}
+
+.feedback-card>div:last-child div>p:first-child {
+    color: #333;
+    margin: 0 0 0.5rem 0;
+}

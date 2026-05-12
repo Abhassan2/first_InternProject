@@ -13,6 +13,7 @@
 .home-container>div:first-child {
     width: 40%;
     padding: 0 3rem;
+    margin: 0 0 1rem 0;
 }
 
 .home-container>div:first-child h1 {
@@ -37,8 +38,21 @@
 
 .home-container>div:last-child {
     flex: 1;
+    margin: 1rem 0 0 0;
 }
 
 .home-container>div:last-child img {
     width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+    .home-container {
+        padding: 1rem 0;
+        flex-direction: column;
+    }
+
+    .home-container>div:first-child {
+        width: 100%;
+        padding: 0 0rem;
+    }
 }

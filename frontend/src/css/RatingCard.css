@@ -8,7 +8,7 @@
     content: "★";
     font-size: 45px;
     color: white;
-    -webkit-text-stroke: 2px rgba(157, 153, 153, 0.783);
+    -webkit-text-stroke: 1px rgba(157, 153, 153, 0.783);
 }
 
 .rating-cardColor::before {

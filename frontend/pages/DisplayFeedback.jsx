@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import "../src/css/DisplayFeedback.css";
 import axios from "axios";
+import FeedbackCard from "../src/components/FeedbackCard";
 
 export default function DisplayFeedback({ apiBaseUrl }) {
   const [allFeedback, setAllFeedback] = useState([]);
+  const [browserWidth, setBrowserWidth] = useState();
 
   const getFeedback = async () => {
     try {
@@ -19,9 +21,20 @@ export default function DisplayFeedback({ apiBaseUrl }) {
     }
   };
 
+  function checkViewport() {
+    if (window.innerWidth < 600) {
+      setBrowserWidth(window.innerWidth);
+    } else {
+      setBrowserWidth(undefined);
+    }
+  }
+  console.log(browserWidth);
+
   useEffect(() => {
+    window.addEventListener("resize", checkViewport);
     getFeedback();
-  }, []);
+    checkViewport();
+  }, [browserWidth]);
 
   return (
     <div className="container">
@@ -31,32 +44,48 @@ export default function DisplayFeedback({ apiBaseUrl }) {
           <p>Below is a list of feedback that has been submitted</p>
         </div>
         <div className="list-feedback">
-          <table>
-            <thead>
-              <tr>
-                <th>Sr no.</th>
-                <th>Email</th>
-                <th>Event</th>
-                <th>Name</th>
-                <th>Rating</th>
-                <th>Feedback</th>
-                <th>Submitted on</th>
-              </tr>
-            </thead>
-            <tbody>
-              {allFeedback.map((feed, index) => (
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{feed.email}</td>
-                  <td>{feed.event}</td>
-                  <td>{feed.name}</td>
-                  <td>{feed.rating}</td>
-                  <td>{feed.feedback}</td>
-                  <td>{feed.submittedOn.split("T")[0]}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          {allFeedback.map(
+            (feed, index) =>
+              browserWidth !== undefined ? (
+                <FeedbackCard
+                  key={index + 1}
+                  index={index + 1}
+                  email={feed.email}
+                  event={feed.event}
+                  name={feed.name}
+                  rating={feed.rating}
+                  submittedOn={feed.submittedOn.split("T")[0]}
+                />
+              )
+              :(
+                <FeedbackCard
+                  key={index + 1}
+                  index={index + 1}
+                  comment={feed.feedback}
+                  email={feed.email}
+                  event={feed.event}
+                  name={feed.name}
+                  rating={feed.rating}
+                  submittedOn={feed.submittedOn.split("T")[0]}
+                />
+              )              
+          )}
+
+          {/* {allFeedback.map(
+            (feed, index) =>
+              browserWidth && (
+                <FeedbackCard
+                  key={index + 1}
+                  index={index + 1}
+                  comment={feed.feedback}
+                  email={feed.email}
+                  event={feed.event}
+                  name={feed.name}
+                  rating={feed.rating}
+                  submittedOn={feed.submittedOn.split("T")[0]}
+                />
+              )
+          )} */}
         </div>
       </div>
     </div>
